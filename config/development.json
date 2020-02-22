@@ -1,0 +1,17 @@
+{
+  "server": {
+    "connection": {
+      "port": 3000,
+      "routes": {
+        "cors": true
+      }
+    }
+  },
+  "db": {
+    "connectionLimit": 100,
+    "host": "localhost",
+    "user": "root",
+    "password": "root",
+    "database": "etag_db"
+  }
+}

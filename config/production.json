@@ -1,0 +1,30 @@
+{
+  "server": {
+    "connection": {
+      "port": 3000,
+      "routes": {
+        "cors": {
+          "origin": [
+            "*"
+          ],
+          "headers": [
+            "Access-Control-Allow-Origin",
+            "Access-Control-Allow-Headers",
+            "Origin",
+            "X-Requested-With",
+            "Content-Type",
+            "Authorization"
+          ],
+          "credentials": true
+        }
+      }
+    }
+  },
+  "db": {
+    "connectionLimit": 100,
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": ""
+  }
+}
