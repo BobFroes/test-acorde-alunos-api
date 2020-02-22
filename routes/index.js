@@ -100,9 +100,15 @@ const { check } = require('express-validator');
 *         schema:
 *           type: string
 *       - in: query
+*         name: status
+*         description: Filtro por status.
+*         enum: [Todos,   Ativos, Inativos]
+*         default: "Todos"
+*         required: true
+*       - in: query
 *         name: sort_by
 *         description: Atributo para ordenação.
-*         enum: [id, nome, cpf, bairro, cidade, status, telefone, criado_em, editado_em]
+*         enum: [id, nome, cpf, bairro, cidade, telefone, criado_em, editado_em]
 *         default: "nome"
 *         required: true
 *         schema:
