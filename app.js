@@ -4,6 +4,10 @@ var swaggerJSDoc = require('swagger-jsdoc')
 var routes = require('./routes/index')
 var bodyParser = require('body-parser')
 
+const APP_URL = process.env.APP_URL || 'localhost'
+const PORT = process.env.PORT || 3333;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
 var app = express()
 
 var swaggerDefinition = {
@@ -53,4 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', routes)
 
 
-app.listen(3333)
+app.listen(PORT, () => {
+  console.log(`Server running on ${APP_URL} and ${NODE_ENV} mode.`)
+  console.log(`Server is listening on port ${PORT}.`)
+})

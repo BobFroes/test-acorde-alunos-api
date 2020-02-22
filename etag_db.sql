@@ -9,4 +9,3 @@ insert into alunos (id, nome, cpf, bairro, cidade, telefone) values (1, 'Joel', 
  (3, 'Angelo Márcio M. de Sales', '99999999999', 'Arapoanga', 'Planaltina', '11223355'),
  (4, 'Arthur José', '33333333333', 'Centro', 'Vitória da Conquista', '55446622');
 
-

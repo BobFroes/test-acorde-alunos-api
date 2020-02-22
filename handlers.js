@@ -2,15 +2,9 @@ const { validationResult } = require('express-validator')
 const CPF = require('cpf-check')
 const mysql = require('mysql2/promise')
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'yourlocalpass',
-  database: 'etag_db',
-  waitForConnections: true,
-  connectionLimit: 100,
-  queueLimit: 0,
-});
+const Config = require('config')
+
+const pool = mysql.createPool(Config.get('db'));
 
 module.exports = {
 
