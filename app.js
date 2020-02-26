@@ -3,12 +3,15 @@ var path = require('path')
 var swaggerJSDoc = require('swagger-jsdoc')
 var routes = require('./routes/index')
 var bodyParser = require('body-parser')
+var cors = require('cors');
 
 const APP_URL = process.env.APP_URL || 'localhost'
 const PORT = process.env.PORT || 3333;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express()
+
+app.use(cors());
 
 var swaggerDefinition = {
   info: {
@@ -38,6 +41,7 @@ var options = {
 // initialize swagger-jsdoc
 var swaggerSpec = swaggerJSDoc(options)
 
+
 app.get('/swagger.json', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
   res.send(swaggerSpec)
@@ -55,7 +59,6 @@ app.use((err, req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', routes)
-
 
 app.listen(PORT, () => {
   console.log(`Server running on ${APP_URL} and ${NODE_ENV} mode.`)

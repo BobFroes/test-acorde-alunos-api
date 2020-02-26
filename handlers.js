@@ -23,17 +23,20 @@ module.exports = {
     try {
       let offset = req.query.limit * (req.query.page - 1)
 
-      let [rows, row_fields] = await pool.query(`select * from etag_db.alunos where id like '%${req.query.searchText}%' or nome like '%${req.query.searchText}%' or cpf like '%${req.query.searchText}%' or bairro like '%${req.query.searchText}%' or cidade like '%${req.query.searchText}%' order by ${req.query.sort_by} ${req.query.sort_order} LIMIT  ${offset}, ${req.query.limit}`)
+      let [total, total_fields] = await pool.query(`select count(*) as count from etag_db.alunos where id like '%${req.query.searchText}%' or nome like '%${req.query.searchText}%' or cpf like '%${req.query.searchText}%' or bairro like '%${req.query.searchText}%' or cidade like '%${req.query.searchText}%'`)
+
+      let [rows, row_fields] = await pool.query(`select * from etag_db.alunos where id like '%${req.query.searchText}%' or nome like '%${req.query.searchText}%' or cpf like '%${req.query.searchText}%' or bairro like '%${req.query.searchText}%' or cidade like '%${req.query.searchText}%' order by ${req.query.sortColumn} ${req.query.sortDirection} LIMIT  ${offset}, ${req.query.limit}`)
 
       if (req.query.status !== 'Todos') {
-        rows = rows.filter(row => row.status === req.query.status)
+        [rows, row_fields] = await pool.query(`select * from etag_db.alunos where (id like '%${req.query.searchText}%' or nome like '%${req.query.searchText}%' or cpf like '%${req.query.searchText}%' or bairro like '%${req.query.searchText}%' or cidade like '%${req.query.searchText}%') and status='${req.query.status}' order by ${req.query.sortColumn} ${req.query.sortDirection} LIMIT  ${offset}, ${req.query.limit}`)
+        total[0].count = rows.length
       }
 
       return res.status(200).json({
         message: rows.length === 0 ? 'A consulta não retornou dados.' : 'Consulta realizada com sucesso.',
         current_page: parseInt(req.query.page),
-        total: parseInt(rows.length),
-        total_pages: Math.ceil(rows.length / req.query.limit),
+        total: parseInt(total[0].count),
+        total_pages: Math.ceil(total[0].count / req.query.limit),
         data: rows
       })
     } catch (error) {

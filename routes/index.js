@@ -106,7 +106,7 @@ const { check } = require('express-validator');
 *         default: "Todos"
 *         required: true
 *       - in: query
-*         name: sort_by
+*         name: sortColumn
 *         description: Atributo para ordenação.
 *         enum: [id, nome, cpf, bairro, cidade, telefone, criado_em, editado_em]
 *         default: "nome"
@@ -114,7 +114,7 @@ const { check } = require('express-validator');
 *         schema:
 *           type: string
 *       - in: query
-*         name: sort_order
+*         name: sortDirection
 *         description: >
 *           `asc` - ascendente de A para Z e
 *           `desc` - descendente de Z para A.
