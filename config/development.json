@@ -2,7 +2,8 @@
   "db": {
     "host": "localhost",
     "user": "root",
-    "password": "B0bcharles@123",
+    "password": "yourpass",
+    "database": "etag_db",
     "waitForConnections": true,
     "connectionLimit": 100,
     "queueLimit": 0
