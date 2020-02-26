@@ -1,2 +1,2 @@
-# test-acorde-alunos-api
-API Initial Tests displays documentation all endpoints, parameters and error messages to the Acorde System.
+# Acorde-API Pilot 
+![alt-text](https://github.com/BobFroes/test-acorde-alunos-api/blob/master/back.gif)
