@@ -522,7 +522,7 @@ routes.get('/v1/perfis', handler.getProfiles)
 *         default: ""
 *         description: Descrição do parentesco
 *     required:
-*       - NOME
+*       - DESCRICAO
 *   RELATIONSHIP_DATA_CONTAINER:
 *     properties:
 *       message:
@@ -565,9 +565,9 @@ routes.get('/v1/graus_parentesco', handler.getRelationships)
 /**
 * @swagger
 * definitions:
-*   MEIO-DIVULGACAO:
+*   MEIO_DIVULGACAO:
 *     properties:
-*       ID_MEIO-DIVULGACAO:
+*       ID_MEIO_DIVULGACAO:
 *         type: integer
 *         description: ID do meio de divulgação
 *         default: 0
@@ -583,8 +583,12 @@ routes.get('/v1/graus_parentesco', handler.getRelationships)
 *         type: string
 *         default: ""
 *         description: Descrição do meio de divulgação
+*       OBSERVACOES:
+*         type: string
+*         default: ""
+*         description: Observações do meio de divulgação
 *     required:
-*       - NOME
+*       - DESCRICAO
 *   DISSEMINATION_DATA_CONTAINER:
 *     properties:
 *       message:
