@@ -292,4 +292,27 @@ module.exports = {
       }))
     }
   },
+
+
+  // Disseminations
+  getDisseminations: async (req, res, next) => {
+
+    try {
+      let pool = await sql.connect(config)
+
+      let rows = await pool.request().query(`select * from dbo.MEIO_DIVULGACAO order by DESCRICAO`)
+
+      return res.status(200).json({
+        message: rows.rowsAffected === 0 ? 'A consulta não retornou dados.' : 'Consulta realizada com sucesso.',
+        data: rows.recordsets
+      })
+    } catch (error) {
+      return next(res.status(500).json({
+        errors: [{
+          message: 'Erro inesperado.',
+          dev_message: error.message,
+        }]
+      }))
+    }
+  },
 }

@@ -543,7 +543,7 @@ routes.get('/v1/perfis', handler.getProfiles)
 *     tags:
 *       - 'GrausParentesco'
 *     summary: Retorna uma lista de graus de parentesco do aluno.
-*     description: Método para listar todos os de graus de parentesco disponíveis para os alunos.
+*     description: Método para listar todos os graus de parentesco disponíveis para os alunos.
 *     produces:
 *       - application/json
 *     responses:
@@ -559,5 +559,66 @@ routes.get('/v1/perfis', handler.getProfiles)
 */
 routes.get('/v1/graus_parentesco', handler.getRelationships)
 
+
+// Means of dissemination
+
+/**
+* @swagger
+* definitions:
+*   MEIO-DIVULGACAO:
+*     properties:
+*       ID_MEIO-DIVULGACAO:
+*         type: integer
+*         description: ID do meio de divulgação
+*         default: 0
+*       DATA_HORA_CRIACAO:
+*         type: date
+*         description: Data e hora do meio de divulgação
+*         default: 0
+*       ATIVO:
+*         type: booleam
+*         description: Status do meio de divulgação
+*         default: 0
+*       DESCRICAO:
+*         type: string
+*         default: ""
+*         description: Descrição do meio de divulgação
+*     required:
+*       - NOME
+*   DISSEMINATION_DATA_CONTAINER:
+*     properties:
+*       message:
+*         type: string
+*         default: Consulta realizada com sucesso
+*         description: Mensagem de retorno
+*       data:
+*         type: array
+*         items:
+*               $ref: '#/definitions/MEIO_DIVULGACAO'
+*         description: Lista de meios de divulgação retornados
+*/
+
+/**
+* @swagger
+* /v1/meios_divulgacao:
+*   get:
+*     tags:
+*       - 'MeiosDivulgacao'
+*     summary: Retorna uma lista de meios de divulgação.
+*     description: Método para listar todos os meios de divulgação disponíveis.
+*     produces:
+*       - application/json
+*     responses:
+*       200:
+*         schema:
+*           $ref: '#/definitions/DISSEMINATION_DATA_CONTAINER'
+*       400:
+*         description: Erro de sintaxe JSON no corpo do request.
+*       401:
+*         description: Informações de autorização ausentes ou inválidas.
+*       5XX:
+*         description: Erro inesperado.
+*/
+routes.get('/v1/meios_divulgacao', handler.getDisseminations)
 
 module.exports = routes
