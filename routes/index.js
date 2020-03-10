@@ -3,53 +3,202 @@ const routes = new express.Router()
 const handler = require('../handlers')
 const { check } = require('express-validator');
 
-// alunos
+// Students
 /**
 * @swagger
 * definitions:
-*   Aluno:
+*   ALUNO:
 *     properties:
-*       id:
+*       ID_ALUNO:
 *         type: integer
 *         description: ID do aluno
 *         default: 0
-*       nome:
-*         type: string
-*         description: Nome do aluno
-*         default: ""
-*       cpf:
-*         type: string
-*         description: CPF do aluno
-*         default: ""
-*       bairro:
-*         type: string
-*         description: Bairro do aluno
-*         default: ""
-*       cidade:
-*         type: string
-*         description: Cidade do aluno
-*         default: ""
-*       telefone:
-*         type: string
-*         description: Telefone do aluno
-*         default: ""
-*       status:
-*         type: string
-*         description: Status do aluno
-*         default: ""
-*       criado_em:
+*       ID_GRAU_PARENTESCO:
+*         type: integer
+*         description: ID do grau de parentesco
+*         default: 0
+*       ID_MEIO_DIVULGACAO:
+*         type: integer
+*         description: ID do meio de divulgação
+*         default: 0
+*       DATA_HORA_CRIACAO:
 *         type: date
 *         default: ""
 *         description: Data de criação
-*       editado_em:
-*         type: date
-*         description: Data de edição
+*       ATIVO:
+*         type: boolean
+*         description: Status do aluno
+*         default: 1
+*       NOME:
+*         type: string
+*         description: Nome do aluno
 *         default: ""
+*       ENDERECO:
+*         type: string
+*         description: Endereço
+*         default: ""
+*       BAIRRO:
+*         type: string
+*         description: Bairro
+*         default: ""
+*       CIDADE:
+*         type: string
+*         description: Cidade
+*         default: ""
+*       UF:
+*         type: string
+*         description: Estado
+*         default: ""
+*       CEP:
+*         type: string
+*         description: CEP
+*         default: ""
+*       TELEFONE_RESIDENCIAL:
+*         type: string
+*         description: Telefone residencial
+*         default: ""
+*       TELEFONE_COMERCIAL:
+*         type: string
+*         description: Telefone comercial
+*         default: ""
+*       RAMAL_COMERCIAL:
+*         type: string
+*         description: Ramal comercial
+*         default: ""
+*       TELEFONE_CELULAR:
+*         type: string
+*         description: Celular
+*         default: ""
+*       EMAIL:
+*         type: string
+*         description: Email
+*         default: ""
+*       RG:
+*         type: string
+*         description: RG
+*         default: ""
+*       CPF:
+*         type: string
+*         description: CPF
+*         default: ""
+*       PROFISSAO:
+*         type: string
+*         description: Profissão
+*         default: ""
+*       NACIONALIDADE:
+*         type: string
+*         description: Nacionalidade
+*         default: ""
+*       ESTADO_CIVIL:
+*         type: string
+*         description: Estado civil
+*         default: ""
+*       FILIACAO_1:
+*         type: string
+*         description: Primeira filiação
+*         default: ""
+*       FILIACAO_2:
+*         type: string
+*         description: Segunda filiação
+*         default: ""
+*       CAMINHO_FOTO:
+*         type: string
+*         description: Segunda filiação
+*         default: ""
+*       RESPONSAVEL_NOME:
+*         type: string
+*         description: Nome do responsável
+*         default: ""
+*       RESPONSAVEL_RG:
+*         type: string
+*         description: RG do responsável
+*         default: ""
+*       RESPONSAVEL_CPF:
+*         type: string
+*         description: CPF do responsável
+*         default: ""
+*       RESPONSAVEL_TEL_RESIDENCIAL:
+*         type: string
+*         description: Contato residencial do responsável
+*         default: ""
+*       RESPONSAVEL_TEL_COMERCIAL:
+*         type: string
+*         description: Contato comercial do responsável
+*         default: ""
+*       RESPONSAVEL_RAMAL_COMERCIAL:
+*         type: string
+*         description: Ramal comercial do responsável
+*         default: ""
+*       RESPONSAVEL_CELULAR:
+*         type: string
+*         description: Celular do responsável
+*         default: ""
+*       RESPONSAVEL_EMAIL:
+*         type: string
+*         description: Email do responsável
+*         default: ""
+*       RESPONSAVEL_DATA_NASCIMENTO:
+*         type: date
+*         default: ""
+*       OBSERVACOES:
+*         type: string
+*         description: Observações
+*         default: ""
+*       SEXO:
+*         type: string
+*         description: Sexo
+*         default: ""
+*       DATA_NASCIMENTO:
+*         type: date
+*         default: ""
+*         description: Data de nascimento
+*       CONJUGE:
+*         type: string
+*         description: Conjuge
+*         default: ""
+*       CAMPO_1:
+*         type: string
+*         description: Campo 1
+*         default: ""
+*       CAMPO_2:
+*         type: string
+*         description: Campo 2
+*         default: ""
+*       CAMPO_3:
+*         type: string
+*         description: Campo 3
+*         default: ""
+*       CAMPO_4:
+*         type: string
+*         description: Campo 4
+*         default: ""
+*       CAMPO_5:
+*         type: string
+*         description: Campo 5
+*         default: ""
+*       SENHA_PORTAL:
+*         type: string
+*         description: Senha do portal
+*         default: ""
+*       CODIGO_REFERENCIA:
+*         type: string
+*         description: Código de referência
+*         default: ""
+*       PERFIL:
+*         type: string
+*         description: Perfil do aluno
+*         default: ""
+*       EMAIL_WHATS_ENVIADO:
+*         type: boolean
+*         description: Email whats enviado
+*         default: 0
+*       WHATS_ENVIADO:
+*         type: boolean
+*         description: Whats enviado
+*         default: 0
 *     required:
-*       - id
-*       - nome
-*       - cpf
-*   DataContainer:
+*       - NOME
+*   STUDENT_DATA_CONTAINER:
 *     properties:
 *       message:
 *         type: string
@@ -67,9 +216,10 @@ const { check } = require('express-validator');
 *       data:
 *         type: array
 *         items:
-*               $ref: '#/definitions/Aluno'
+*               $ref: '#/definitions/ALUNO'
 *         description: Lista de alunos retornados
 */
+
 
 /**
 * @swagger
@@ -126,7 +276,7 @@ const { check } = require('express-validator');
 *     responses:
 *       200:
 *         schema:
-*           $ref: '#/definitions/DataContainer'
+*           $ref: '#/definitions/STUDENT_DATA_CONTAINER'
 *       400:
 *         description: Erro de sintaxe JSON no corpo do request.
 *       401:
@@ -165,7 +315,7 @@ check('limit')
 *       200:
 *         description: Ok! aluno retornado.
 *         schema:
-*           $ref: '#/definitions/Aluno'
+*           $ref: '#/definitions/ALUNO'
 *       400:
 *         description: Erro de sintaxe JSON no corpo do request.
 *       401:
@@ -193,11 +343,11 @@ routes.get('/v1/alunos/:id', handler.getStudentById)
 *         in: body
 *         required: true
 *         schema:
-*           $ref: '#/definitions/Aluno'
+*           $ref: '#/definitions/ALUNO'
 *     responses:
 *       200:
 *         schema:
-*           $ref: '#/definitions/Aluno'
+*           $ref: '#/definitions/ALUNO'
 *       201:
 *         description: aluno criado com sucesso.
 *       400:
@@ -207,17 +357,15 @@ routes.get('/v1/alunos/:id', handler.getStudentById)
 *       409:
 *         description: <ul>
 *                          <li>O nome é obrigatório.</li>
-*                          <li>O CPF é obrigatório.</li>
-*                          <li>CPF inválido.</li>
+*                          <li>O CPF do aluno é inválido.</li>
+*                          <li>O CPF do responsável pelo aluno é inválido.</li>
 *                      </ul>
 *       5XX:
 *         description: Erro inesperado.
 */
 routes.post('/v1/alunos', [
-  check('nome')
-    .isLength({ min: 1 }).withMessage('O nome é obrigatório.'),
-  check('cpf')
-    .isLength({ min: 1 }).withMessage('O CPF é obrigatório.')
+  check('NOME')
+    .isLength({ min: 1 }).withMessage('O nome é obrigatório.')
 ], handler.createStudent)
 
 /**
@@ -236,7 +384,7 @@ routes.post('/v1/alunos', [
 *         in: body
 *         required: true
 *         schema:
-*           $ref: '#/definitions/Aluno'
+*           $ref: '#/definitions/ALUNO'
 *     responses:
 *       200:
 *         description: aluno atualizado com sucesso
@@ -254,10 +402,8 @@ routes.post('/v1/alunos', [
 *         description: Erro inesperado.
 */
 routes.put('/v1/alunos', [
-  check('nome')
-    .isLength({ min: 1 }).withMessage('O nome é obrigatório.'),
-  check('cpf')
-    .isLength({ min: 1 }).withMessage('O CPF é obrigatório.')
+  check('NOME')
+    .isLength({ min: 1 }).withMessage('O nome é obrigatório.')
 ], handler.updateStudent)
 
 /**
@@ -289,6 +435,129 @@ routes.put('/v1/alunos', [
 *         description: Erro inesperado.
 */
 routes.delete('/v1/alunos/:id', handler.removeStudent)
+
+
+// Profiles
+
+/**
+* @swagger
+* definitions:
+*   PERFIL:
+*     properties:
+*       ID_PERFIL:
+*         type: integer
+*         description: ID do aluno
+*         default: 0
+*       NOME:
+*         type: integer
+*         description: ID do grau de parentesco
+*         default: 0
+*       IDADE_INICIAL:
+*         type: integer
+*         description: ID do meio de divulgação
+*         default: 0
+*       IDADE_FINAL:
+*         type: integer
+*         default: ""
+*         description: Idade final do aluno
+*     required:
+*       - NOME
+*   PROFILE_DATA_CONTAINER:
+*     properties:
+*       message:
+*         type: string
+*         default: Consulta realizada com sucesso
+*         description: Mensagem de retorno
+*       data:
+*         type: array
+*         items:
+*               $ref: '#/definitions/PERFIL'
+*         description: Lista de perfis retornados
+*/
+
+/**
+* @swagger
+* /v1/perfis:
+*   get:
+*     tags:
+*       - 'Perfis'
+*     summary: Retorna uma lista de perfis do aluno.
+*     description: Método para listar todos os perfis disponíveis para os alunos.
+*     produces:
+*       - application/json
+*     responses:
+*       200:
+*         schema:
+*           $ref: '#/definitions/PROFILE_DATA_CONTAINER'
+*       400:
+*         description: Erro de sintaxe JSON no corpo do request.
+*       401:
+*         description: Informações de autorização ausentes ou inválidas.
+*       5XX:
+*         description: Erro inesperado.
+*/
+routes.get('/v1/perfis', handler.getProfiles)
+
+// Relationships
+
+/**
+* @swagger
+* definitions:
+*   GRAU_PARENTESCO:
+*     properties:
+*       ID_GRAU_PARENTESCO:
+*         type: integer
+*         description: ID do grau de parentesco
+*         default: 0
+*       DATA_HORA_CRIACAO:
+*         type: date
+*         description: Data e hora de criação do parentesco
+*         default: 0
+*       ATIVO:
+*         type: booleam
+*         description: Status do parentesco
+*         default: 0
+*       DESCRICAO:
+*         type: string
+*         default: ""
+*         description: Descrição do parentesco
+*     required:
+*       - NOME
+*   RELATIONSHIP_DATA_CONTAINER:
+*     properties:
+*       message:
+*         type: string
+*         default: Consulta realizada com sucesso
+*         description: Mensagem de retorno
+*       data:
+*         type: array
+*         items:
+*               $ref: '#/definitions/GRAU_PARENTESCO'
+*         description: Lista de graus de parentesco retornados
+*/
+
+/**
+* @swagger
+* /v1/graus_parentesco:
+*   get:
+*     tags:
+*       - 'GrausParentesco'
+*     summary: Retorna uma lista de graus de parentesco do aluno.
+*     description: Método para listar todos os de graus de parentesco disponíveis para os alunos.
+*     produces:
+*       - application/json
+*     responses:
+*       200:
+*         schema:
+*           $ref: '#/definitions/RELATIONSHIP_DATA_CONTAINER'
+*       400:
+*         description: Erro de sintaxe JSON no corpo do request.
+*       401:
+*         description: Informações de autorização ausentes ou inválidas.
+*       5XX:
+*         description: Erro inesperado.
+*/
+routes.get('/v1/graus_parentesco', handler.getRelationships)
 
 
 module.exports = routes
